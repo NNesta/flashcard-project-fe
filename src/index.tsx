@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import AllRoutes from './routes';
+import { Provider } from 'react-redux';
+import store from './redux/store';
 import {
   ApolloClient,
   InMemoryCache,
@@ -13,17 +15,19 @@ import {
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
-const localGraphQL = "http://localhost:4000";
+const localGraphQL = "https://flashcards-task.herokuapp.com";
 export const client = new ApolloClient({
   uri: localGraphQL,
   cache: new InMemoryCache()
 });
 root.render(
+  <Provider store={store}>
   <ApolloProvider client={client}>
   <React.StrictMode>
      <AllRoutes />
     </React.StrictMode>
-  </ApolloProvider>
+    </ApolloProvider>
+    </ Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function
