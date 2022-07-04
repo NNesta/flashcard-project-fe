@@ -6,6 +6,7 @@ import RegisterModal from "../register"
 import { useDispatch, useSelector } from 'react-redux';
 import { setLoggin } from '../../redux/features/loggin.feature'
 import { useNavigate } from 'react-router-dom'
+import { removeRegister } from '../../redux/features/register.feature'
 
 
 
@@ -22,9 +23,9 @@ function HomeComponent() {
       <div className=''>
         <img src={background} alt="" />
         <div className='absolute left-[7%] top-[30%]'>
-          <h1 className='text-7xl text-white '>GROW YOUR MEMORIZING</h1>
-          <h1 className='text-7xl text-white '>CAPABILITY</h1>
-          <button onClick={()=>sessionStorage.getItem("token")? navigate("/dashboard") : dispatch(setLoggin())} className='text-white bg-blue-500 rounded-lg my-48 p-8 text-2xl'>Find your flashcard</button>
+          <h1 className='text-7xl leading-1 tracking-wider text-white '>GROW YOUR </h1>
+          <h1 className='text-7xl text-white uppercase'>Brain ability</h1>
+          <button onClick={()=>sessionStorage.getItem("token")? navigate("/dashboard") : dispatch(setLoggin()) && dispatch(removeRegister())} className='text-white bg-blue-500 rounded-lg my-48 p-8 text-2xl'>Find your flashcard</button>
         </div>
        
         <div className='absolute left-[40%] top-[17%]'>
