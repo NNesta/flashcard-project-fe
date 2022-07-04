@@ -32,9 +32,7 @@ const DashboardComponent = (props: Props) => {
       setAllCategories(result.data.categories.categories)
     };
     categories();
-  }, [])
-  const listCategories = allCategories?.map(category => category.name);
-  console.log(listCategories);
+  }, []);
   return (
     <div className='flex'>
       <div className="fixed"><Sidebar /></div>
@@ -60,7 +58,7 @@ const DashboardComponent = (props: Props) => {
       </div>
       <div className='absolute left-[40%] top-[17%]'>
         <CategoryModal show={category} />
-        <FlashcardModal show={flashcard} categories={listCategories} />
+        <FlashcardModal show={flashcard}/>
       </div>
     </div>
   )

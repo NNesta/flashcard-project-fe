@@ -57,6 +57,7 @@ function RegisterModal(props: Props) {
   
   return (
     <div className='bg-white mx-auto w-96 border-gray-100 shadow-lg  flex flex-col'>
+      <button onClick={()=>dispatch(removeRegister())} type="button" className='absolute top-0 right-0 px-1 rounded-full bg-red-300 w-5 h-5 m-1 text-sm'>X</button>
       {afterRegister && <Alert message={`${message}`} variant={`${variant}`} heading={`${heading}`} />}
       <h1 className='text-3xl font-poppins mx-auto mt-2 font-bold'>Register</h1>
        <div className='mx-auto h-[450px] flex flex-col justify-between py-4'>

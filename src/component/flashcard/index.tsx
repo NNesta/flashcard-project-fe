@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { gql } from "@apollo/client"
 import { client } from "../../index"
 import Alert from "../messageComponent/Alert"
@@ -8,7 +8,6 @@ import { removeCreateFlashcard } from '../../redux/features/flashcards.feature'
 
 type Props = {
   show: boolean;
-  categories: Array<any> | undefined;
 }
 
 /* type signup = {
@@ -19,14 +18,32 @@ type Props = {
 function RegisterModal(props: Props) {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const { show, categories } = props;
-  const [category, setCategory] = useState<string>('');
+  const { show } = props;
   const [question, setQuestion] = useState<String>('');
   const [answer, setAnswer] = useState<String>('');
   const [message, setMessage] = useState<String>('');
   const [heading, setHeading] = useState<String>('');
   const [variant, setVariant] = useState<String>('');
   const [afterRegister, setAfterRegister] = useState<Boolean>(false)
+  const [allCategories, setAllCategories] = useState<Array<any> | null>(null)
+  useEffect(() => {
+    const categories = async () => {
+      
+      const result = await client.query({
+        query: gql`
+  query {categories{
+    categories{
+      name
+    }
+  }}`
+      });
+      setAllCategories(result.data.categories.categories.map((cat: { name: any })=>cat.name))
+    };
+    categories();
+  }, [])
+  const [category, setCategory] = useState<string>('History');
+  console.log("allCategories");
+  console.log(allCategories);
   if (!show) {
     return null;
   }
@@ -42,15 +59,18 @@ function RegisterModal(props: Props) {
         mutation: gql`
   mutation{
     createFlashcard(question: "${question}", answer: "${answer}", category: "${category}"){
+    id
     question
   }}`
     });
+    console.log("result");
+    console.log(result);
     if (result.data) {
       setMessage("Succesfully created flashcard")
       setHeading("Success")
       setVariant("success")
       setAfterRegister(true)
-      setTimeout(() => { navigate('/')}, 2000);
+      setTimeout(() => { setAfterRegister(false); dispatch(removeCreateFlashcard()); navigate('.')}, 2000);
       }
     }
     
@@ -78,8 +98,8 @@ function RegisterModal(props: Props) {
                 id="category"
                 className="w-64 rounded-md my-2 p-2 border border-black placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 hover:border-yellow-500"
               >
-                { categories?.length ? (
-                  categories?.map((category:string) => (
+                { allCategories?.length ? (
+                  allCategories?.map((category:string) => (
                     <option value={category}>{category}</option>
                   ))
                 ) : (
@@ -90,7 +110,7 @@ function RegisterModal(props: Props) {
       <input onChange={(e)=>setQuestion(e.target.value)} placeholder='Question' type='text' className='border-b-2 border-gray-500 w-80 text-xl' />
       <label htmlFor="answer" className='text-xl'>Answer</label>
         <input onChange={(e)=>setAnswer(e.target.value)}  placeholder='Answer' type='text' className='border-b-2 border-gray-500 w-80 text-xl' />
-        <button onClick={async () => { await handleSubmit(); dispatch(removeCreateFlashcard())}} type='submit' className='w-48 p-2 mx-auto bg-orange-200 text-2xl my-4 rounded-md hover:bg-orange-500'>Add Flashcard</button>
+        <button onClick={async () => { await handleSubmit()}} type='submit' className='w-48 p-2 mx-auto bg-orange-200 text-2xl my-4 rounded-md hover:bg-orange-500'>Add Flashcard</button>
        </div>
        <div className='flex flex-col my-4 space-y-4'>
        </div>

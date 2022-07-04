@@ -16,6 +16,7 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 const localGraphQL = "https://flashcards-task.herokuapp.com";
+//const localGraphQL = "http://localhost:4000/";
 export const client = new ApolloClient({
   uri: localGraphQL,
   cache: new InMemoryCache()
