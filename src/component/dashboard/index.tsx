@@ -37,7 +37,7 @@ const DashboardComponent = (props: Props) => {
     <div className='flex'>
       <div className="fixed"><Sidebar /></div>
       
-      <div className='ml-24 w-screen'>
+      <div className='ml-32 w-screen'>
         <div className='w-auto flex items-center px-8 justify-between border-b-2 border-gray-100'>
           <div> Knowledge Rehab</div>
           <div className='w-32 h-32 text-center py-8 rounded-full border-8 border-gray-300'> 
