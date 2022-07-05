@@ -14,7 +14,7 @@ const Sidebar = (props: Props) => {
           <div>
               <div>Logo</div>  
               <div>Profile</div> 
-              <button onClick={()=>console.log("logged out")}>Logout</button>
+              <button onClick={()=>sessionStorage.clear()}>Logout</button>
           </div>
       <div className='flex flex-col gap-y-12'>
          <div className='relative'>

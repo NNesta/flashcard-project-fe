@@ -42,13 +42,10 @@ function RegisterModal(props: Props) {
     categories();
   }, [])
   const [category, setCategory] = useState<string>('History');
-  console.log("allCategories");
-  console.log(allCategories);
   if (!show) {
     return null;
   }
   const handleSubmit = async () => {
-    console.log("get there", category, question, answer);
   try{
     const result = await client.mutate({
       context: {
@@ -63,8 +60,6 @@ function RegisterModal(props: Props) {
     question
   }}`
     });
-    console.log("result");
-    console.log(result);
     if (result.data) {
       setMessage("Succesfully created flashcard")
       setHeading("Success")
@@ -75,7 +70,6 @@ function RegisterModal(props: Props) {
     }
     
   catch (error) {
-    console.log(error);
       setMessage("Failed to create flashcard")
       setHeading("Error")
       setVariant("error")
@@ -110,7 +104,7 @@ function RegisterModal(props: Props) {
       <input onChange={(e)=>setQuestion(e.target.value)} placeholder='Question' type='text' className='border-b-2 border-gray-500 w-80 text-xl' />
       <label htmlFor="answer" className='text-xl'>Answer</label>
         <input onChange={(e)=>setAnswer(e.target.value)}  placeholder='Answer' type='text' className='border-b-2 border-gray-500 w-80 text-xl' />
-        <button onClick={async () => { await handleSubmit()}} type='submit' className='w-48 p-2 mx-auto bg-orange-200 text-2xl my-4 rounded-md hover:bg-orange-500'>Add Flashcard</button>
+        <button onClick={async () => { await handleSubmit();  window.location.reload()}} type='submit' className='w-48 p-2 mx-auto bg-orange-200 text-2xl my-4 rounded-md hover:bg-orange-500'>Add Flashcard</button>
        </div>
        <div className='flex flex-col my-4 space-y-4'>
        </div>
