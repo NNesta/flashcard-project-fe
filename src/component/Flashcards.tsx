@@ -34,9 +34,6 @@ const FlashcardsComponent = (props: Props) => {
     };
     categories();
   }, [])
-  
-    console.log(allFlashcards);
-  const listCategories = allFlashcards?.map(flashcard => flashcard.name);
   return (
     <div className='flex'>
       <Sidebar />

@@ -15,7 +15,6 @@ type Props = {
   description: String,
 } */
 function CategoryModal(props: Props) {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { show } = props;
   const [name, setName] = useState<String>('');
@@ -41,18 +40,16 @@ function CategoryModal(props: Props) {
     name
   }}`
     });
-    console.log(result.data);
     if (result.data) {
       setMessage("Succesfully created category")
       setHeading("Success")
       setVariant("success")
       setAfterRegister(true)
-      setTimeout(() => { console.log("get here"); dispatch(removeCreateCategory()); navigate('/dashboard/#')}, 2000);
+      setTimeout(() => { setAfterRegister(false); dispatch(removeCreateCategory())}, 2000);
       }
     }
     
   catch (error) {
-      console.log(error);
       setMessage("Failed to create category")
       setHeading("Error")
       setVariant("error")
@@ -70,7 +67,7 @@ function CategoryModal(props: Props) {
       <input onChange={(e)=>setName(e.target.value)} placeholder='Names' type='text' className='border-b-2 border-gray-500 w-80  text-xl focus:border-none' />
       <label htmlFor="description" className='text-xl'> Description</label>
       <textarea cols={4} rows={2} onChange={(e)=>setDescription(e.target.value)} placeholder='Description'className='border-b-2 border-gray-500 w-80 text-xl' />
-        <button onClick={async () => { await handleSubmit();  dispatch(removeCreateCategory())}} type='submit' className='w-48 p-2 mx-auto bg-orange-200 text-2xl my-4 rounded-md hover:bg-orange-500'>Add category</button>
+        <button onClick={async () => { await handleSubmit();  window.location.reload()}} type='submit' className='w-48 p-2 mx-auto bg-orange-200 text-2xl my-4 rounded-md hover:bg-orange-500'>Add category</button>
        </div>
     
       </div>

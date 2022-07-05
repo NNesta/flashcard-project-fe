@@ -37,7 +37,6 @@ function RegisterModal(props: Props) {
     name
   }}`
     });
-    console.log(result.data.signup);
     if (result.data.signup) {
       setMessage("Succesfully register")
       setHeading("Success")
@@ -67,7 +66,7 @@ function RegisterModal(props: Props) {
       <input onChange={(e)=>setEmail(e.target.value)} placeholder='E-mail' type='email' className='border-b-2 border-gray-500 w-80 text-xl' />
       <label htmlFor="password" className='text-xl'> Password</label>
         <input onChange={(e)=>setPassword(e.target.value)}  placeholder='Password' type='password' className='border-b-2 border-gray-500 w-80 text-xl' />
-        <button onClick={async()=>{console.log("hhh");await handleSubmit()}} type='submit' className='w-48 p-2 mx-auto bg-orange-200 text-2xl my-4 rounded-md hover:bg-orange-500'>Register</button>
+        <button onClick={async()=>{ await handleSubmit()}} type='submit' className='w-48 p-2 mx-auto bg-orange-200 text-2xl my-4 rounded-md hover:bg-orange-500'>Register</button>
        </div>
        <div className='flex flex-col my-4 space-y-4'>
        </div>
