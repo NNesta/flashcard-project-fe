@@ -18,14 +18,15 @@ function HomeComponent() {
   
   return (
     <div className='mx-4 relative'>
-      <Navbar />
-      
       <div className=''>
+      <Navbar />
+      </div>
+  <div className=''>
         <img src={background} alt="" />
         <div className='absolute left-[7%] top-[30%]'>
           <h1 className='text-7xl leading-1 tracking-wider text-white '>GROW YOUR </h1>
           <h1 className='text-7xl text-white uppercase'>Brain ability</h1>
-          <button onClick={()=>sessionStorage.getItem("token")? navigate("/dashboard") : dispatch(setLoggin()) && dispatch(removeRegister())} className='text-white bg-blue-500 rounded-lg my-48 p-8 text-2xl'>Find your flashcard</button>
+          <button onClick={()=>sessionStorage.getItem("token")? navigate("/dashboard") : dispatch(setLoggin()) && dispatch(removeRegister())} className='text-white bg-blue-500 rounded-lg my-48 p-8 text-2xl hover:bg-blue-600 hover:scale-105 ease-in-out'>Find your flashcard</button>
         </div>
        
         <div className='absolute left-[40%] top-[17%]'>

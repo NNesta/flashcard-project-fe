@@ -33,7 +33,7 @@ const FlashcardsComponent = (props: Props) => {
       setAllFlashcards(result.data.flashcards.flashcards)
     };
     categories();
-  }, [])
+  }, [id])
   return (
     <div className='flex'>
       <Sidebar />
